@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilha de Treino</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
+            --bg-color: #f3f4f6;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --border-color: #e5e7eb;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        /* --- Dropdown / Accordion (HTML Puro) --- */
+        .dropdown {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .dropdown-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 16px 20px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s;
+            list-style: none; /* Remove a setinha padrão do <details> */
+        }
+
+        /* Oculta a seta padrão em navegadores WebKit */
+        .dropdown-header::-webkit-details-marker {
+            display: none;
+        }
+
+        .dropdown-header:hover {
+            filter: brightness(0.9);
+        }
+
+        .dropdown-icon {
+            transition: transform 0.3s ease;
+        }
+
+        /* Gira a seta quando o <details> está aberto */
+        details[open] .dropdown-icon {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            background-color: var(--bg-color);
+            padding-bottom: 10px;
+        }
+
+        /* --- Cartão de Exercício --- */
+        .exercise-card {
+            background-color: var(--card-bg);
+            margin: 10px;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .exercise-gif {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+            background-color: #e5e7eb;
+        }
+
+        .exercise-name {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin: 12px 0 8px 0;
+            font-weight: 700;
+        }
+
+        .exercise-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            background: #f9fafb;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .exercise-info strong {
+            color: var(--text-main);
+        }
+
+        /* --- Interações: Séries --- */
+        .interaction-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .set-counter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .set-counter label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+
+        .checkboxes {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .checkboxes input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            accent-color: var(--success);
+            cursor: pointer;
+        }
+
+        /* --- Observação --- */
+        .observation {
+            background-color: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 10px;
+            font-size: 0.85rem;
+            color: #92400e;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    
+    <details class="dropdown" id="treinoA">
+        <summary class="dropdown-header">
+            🏋️‍♂️ Treino A
+            <span class="dropdown-icon">▼</span>
+        </summary>
+        
+        <div class="dropdown-content">
+            <div class="exercise-card">
+                <img src="https://i.pinimg.com/originals/5e/53/d4/5e53d49daddb624dbded8f7e2c210b99.gif" alt="Supino inclinado com halteres" class="exercise-gif">
+                <h3 class="exercise-name">1. Supino inclinado com halteres</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 5 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="observation">
+                    <strong>Obs:</strong> 2 primeiras séries de aquecimento.
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://static.wixstatic.com/media/2edbed_80220eb2779c4804a8a9cb9a9053077a~mv2.gif" alt="Supino reto maquina" class="exercise-gif">
+                <h3 class="exercise-name">2. Supino reto máquina</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 3 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2024/08/crucifixo-crossover-alto.gif" alt="CrossOver Baixo" class="exercise-gif">
+                <h3 class="exercise-name">3. CrossOver Baixo</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 4 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://i.pinimg.com/originals/8b/d3/74/8bd3745dca0749b912b08b0d4bca3833.gif" alt="Elevação Lateral com halteres" class="exercise-gif">
+                <h3 class="exercise-name">4. Elevação Lateral com halteres</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 4 x 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLLbgkHi_aDXI8rrYAd1B0DFYF_Dku9a33Vg&s" alt="Desenvolvimento máquina" class="exercise-gif">
+                <h3 class="exercise-name">5. Desenvolvimento máquina</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 3 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://www.mundoboaforma.com.br/wp-content/uploads/2021/07/triceps-puxada-no-pulley.gif" alt="Tríceps na polia com barra em V" class="exercise-gif">
+                <h3 class="exercise-name">6. Tríceps na polia com barra em V</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 4 x 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </details>
+
+    <details class="dropdown" id="treinoB">
+        <summary class="dropdown-header" style="background-color: #ef4444;">
+            🦍 Treino B
+            <span class="dropdown-icon">▼</span>
+        </summary>
+        
+        <div class="dropdown-content">
+            <div class="exercise-card">
+                <img src="https://static.wixstatic.com/media/2edbed_eb1a2f5a37ab496d8cc1297ed3b023a1~mv2.gif" alt="Remada articulada maquina" class="exercise-gif">
+                <h3 class="exercise-name">1. Remada articulada máquina</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 5 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="observation">
+                    <strong>Obs:</strong> 2 primeiras séries de aquecimento.
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2023/11/dumbbell-incline-row.gif" alt="Remada Cavalo maquina" class="exercise-gif">
+                <h3 class="exercise-name">2. Remada Cavalo máquina</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 4 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://image.tuasaude.com/media/article/ku/ib/treino-costas_73930.gif?width=686&height=487" alt="Puxada polia" class="exercise-gif">
+                <h3 class="exercise-name">3. Puxada polia</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 4 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://i0.wp.com/meutreinador.com/wp-content/uploads/2023/12/34_Rosca-Martelo-com-Halteres-Sentado.gif?resize=720%2C480&ssl=1" alt="Rosca alternada com Halteres Sentado" class="exercise-gif">
+                <h3 class="exercise-name">4. Rosca alternada com Halteres Sentado</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 3 x 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/rosca-biceps-com-halteres-no-banco-inclinado.gif" alt="Rosca alternada com Halteres Sentado Inclinado" class="exercise-gif">
+                <h3 class="exercise-name">5. Rosca alternada Halteres Sentado Inclinado</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 3 x 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </details>
+
+    <details class="dropdown" id="treinoC">
+        <summary class="dropdown-header" style="background-color: #8b5cf6;">
+            🦵 Treino C
+            <span class="dropdown-icon">▼</span>
+        </summary>
+        
+        <div class="dropdown-content">
+            <div class="exercise-card">
+                <img src="https://media.tenor.com/e0qeS17dv7QAAAAM/legpress45-leg-press.gif" alt="Legpress" class="exercise-gif">
+                <h3 class="exercise-name">1. Legpress</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 5 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="observation">
+                    <strong>Obs:</strong> 2 primeiras séries de aquecimento.
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://media.tenor.com/bqKtsSuqilQAAAAM/gym.gif" alt="Cadeira extensora" class="exercise-gif">
+                <h3 class="exercise-name">2. Cadeira Extensora</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 5 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="observation">
+                    <strong>Obs:</strong> Todas pra valer.
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://media.tenor.com/fj_cZPprAyMAAAAM/gym.gif" alt="Mesa flexora" class="exercise-gif">
+                <h3 class="exercise-name">3. Mesa Flexora</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 5 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+                <div class="observation">
+                    <strong>Obs:</strong> Todas pra valer.
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://i.pinimg.com/originals/82/4d/fd/824dfd405284597cd20e8a55233e2d77.gif" alt="Stiff" class="exercise-gif">
+                <h3 class="exercise-name">4. Stiff</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 4 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exercise-card">
+                <img src="https://www.hipertrofia.org/blog/wp-content/uploads/2023/07/standing-calf-raise-on-a-staircase.gif" alt="Panturrilha" class="exercise-gif">
+                <h3 class="exercise-name">5. Panturrilha</h3>
+                <div class="exercise-info">
+                    <span><strong>Séries:</strong> 4 x 08 a 12</span>
+                    <span><strong>Descanso:</strong> 60s</span>
+                </div>
+                <div class="interaction-area">
+                    <div class="set-counter">
+                        <label>Séries Concluídas:</label>
+                        <div class="checkboxes">
+                            <input type="checkbox"><input type="checkbox"><input type="checkbox"><input type="checkbox">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </details>
+
+</div>
+
+</body>
+</html>
